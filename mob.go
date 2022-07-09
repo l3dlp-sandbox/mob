@@ -938,7 +938,7 @@ func startTimer(timerInMinutes string, configuration Configuration) {
 
 	if startRemoteTimer {
 		timerUser := getUserForMobTimer(configuration.TimerUser)
-		err := httpPutTimer(timeoutInMinutes, room, timerUser, configuration.TimerUrl)
+		err := HttpPutTimer(room+configuration.TimerUrl, timeoutInMinutes, timerUser)
 		if err != nil {
 			sayError("remote timer couldn't be started")
 			sayError(err.Error())
@@ -996,7 +996,7 @@ func startBreakTimer(timerInMinutes string, configuration Configuration) {
 
 	if startRemoteTimer {
 		timerUser := getUserForMobTimer(configuration.TimerUser)
-		err := httpPutBreakTimer(timeoutInMinutes, room, timerUser, configuration.TimerUrl)
+		err := HttpPutBreakTimer(room+configuration.TimerUrl, timeoutInMinutes, timerUser)
 
 		if err != nil {
 			sayError("remote break timer couldn't be started")

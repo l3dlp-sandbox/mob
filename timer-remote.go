@@ -8,23 +8,24 @@ import (
 	"net/http"
 )
 
-func httpPutTimer(timeoutInMinutes int, room string, user string, timerService string) error {
+func HttpPutTimer(roomUrl string, timeoutInMinutes int, user string) error {
 	putBody, _ := json.Marshal(map[string]interface{}{
 		"timer": timeoutInMinutes,
 		"user":  user,
 	})
-	return sendRequest(putBody, "PUT", timerService+room)
+	return sendPutRequest(roomUrl, putBody)
 }
 
-func httpPutBreakTimer(timeoutInMinutes int, room string, user string, timerService string) error {
+func HttpPutBreakTimer(roomUrl string, timeoutInMinutes int, user string) error {
 	putBody, _ := json.Marshal(map[string]interface{}{
 		"breaktimer": timeoutInMinutes,
 		"user":       user,
 	})
-	return sendRequest(putBody, "PUT", timerService+room)
+	return sendPutRequest(roomUrl, putBody)
 }
 
-func sendRequest(requestBody []byte, requestMethod string, requestUrl string) error {
+func sendPutRequest(requestUrl string, requestBody []byte) error {
+	requestMethod := "PUT"
 	sayInfo(requestMethod + " " + requestUrl + " " + string(requestBody))
 
 	responseBody := bytes.NewBuffer(requestBody)
