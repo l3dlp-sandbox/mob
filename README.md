@@ -188,6 +188,10 @@ Basic Commands(Options):
     [--squash-wip]                       Squash wip commits from wip branch, maintaining manual commits
   reset
     [--branch|-b <branch-postfix>]       Set wip branch to 'mob/<base-branch>/<branch-postfix>'
+  goal                                   Gives you the current goal of your timer.mob.sh room
+    [<your-goal>]                        Sets the goal of your timer.mob.sh room
+    [--delete]                           Deletes the goal of your timer.mob.sh room
+
 
 Timer Commands:
   timer <minutes>           Start a <minutes> timer
@@ -196,6 +200,9 @@ Timer Commands:
     [--room <room-name>]    Set room name for timer.mob.sh once
   start <minutes>           Start mob session in wip branch and a <minutes> timer
   break <minutes>           Start a <minutes> break timer
+  goal                      Gives you the current goal of your timer.mob.sh room
+    [<your-goal>]           Sets the goal of your timer.mob.sh room
+    [--delete]              Deletes the goal of your timer.mob.sh room
 
 Short Commands (Options and descriptions as above):
   s                  alias for 'start'
@@ -203,6 +210,7 @@ Short Commands (Options and descriptions as above):
   d                  alias for 'done'
   b                  alias for 'branch'
   t                  alias for 'timer'
+  g                  Alias for 'goal'
 
 Get more information:
   status             show the status of the current session
