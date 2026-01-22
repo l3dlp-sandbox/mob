@@ -259,7 +259,7 @@ If you need some assistance when typing the subcommands and options, you might w
   - Always specify a timer when using `mob start` (for a 5 minute timer use `mob start 5`)
   - *Why?* Rotation is key to good pair and mob programming. Just build the habit right from the start. Try to set a timer so everybody can have a turn at least once every 30 minutes.
 - **Set up a global shortcut for screensharing**
-  - Set up a global keyboard shortcut to start sharing your screen. In Zoom, you can do this via Zoom > Preferences > Keyboard Shortcuts. [More tips on setting up Zoom for effective screen sharing.](https://effectivehomeoffice.com/setup-zoom-for-effective-screen-sharing/)
+  - Set up a global keyboard shortcut to start sharing your screen. In Zoom, you can do this via Zoom > Preferences > Keyboard Shortcuts. [More tips on setting up Zoom for effective screen sharing.](https://effectivehomeoffice.github.io/setup-zoom-for-effective-screen-sharing/)
   - *Why?* This is just much faster than using the mouse.
 - **Set your editor to autosave**
   - Have your editor save your files on every keystroke automatically. IntelliJ products do this automatically. VS Code, however, needs to be configured via "File > Auto Save toggle".
