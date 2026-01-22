@@ -948,6 +948,32 @@ func TestStartNextStay_OpenLastModifiedFile_WhenLastModifiedFilePathContainsSpac
 	})
 }
 
+func TestStartNextStay_OpenLastModifiedFile_WhenCommitMessageHasAppendedContent(t *testing.T) {
+	_, configuration := setup(t)
+	configuration.NextStay = true
+	if runtime.GOOS == "windows" {
+		configuration.OpenCommand = "cmd.exe /C type nul > %s-1"
+	} else {
+		configuration.OpenCommand = "touch %s-1"
+	}
+
+	start(configuration)
+	createFile(t, "file.txt", "contentIrrelevant")
+	assertOnBranch(t, "mob-session")
+	next(configuration)
+
+	// Simulate git hook appending content to the commit message
+	currentMessage := silentgit("log", "--format=%B", "-n", "1", "HEAD")
+	git("commit", "--amend", "-m", currentMessage+"\n\nSigned-off-by: Git Hook <hook@example.com>")
+	git("push", "--force", "origin", "mob-session")
+
+	start(configuration)
+
+	assertGitStatus(t, GitStatus{
+		"file.txt-1": "??",
+	})
+}
+
 func TestRunOutput(t *testing.T) {
 	_, configuration := setup(t)
 

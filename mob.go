@@ -689,7 +689,7 @@ func openLastModifiedFileIfPresent(configuration config.Configuration) {
 		say.Warning("Could not determine last modified file from commit message, separator was used multiple times!")
 		return
 	}
-	lastModifiedFile := split[1]
+	lastModifiedFile := strings.Split(split[1], "\n")[0]
 	if strings.HasPrefix(lastModifiedFile, "\"") {
 		lastModifiedFile, _ = strconv.Unquote(lastModifiedFile)
 	}
