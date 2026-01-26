@@ -1,3 +1,6 @@
+# 5.4.2
+- Fix: `mob start` now correctly handles parsing of lastFile when the commit message has been extended with additional information.
+
 # 5.4.1
 - Fix: `mob next` now correctly handles filenames with spaces when determining the last modified file for the open command.
 
@@ -10,7 +13,7 @@ Thanks to @TimsDevCorner for your contributions!
 - Fix: `mob start` now functions correctly on WIP branches when the base branch is not checked out, applicable to branch names that do not contain a `-` character.
 
 # 5.3.2
-- Fix: Removed wrong warning about diverging wip branch when joining a new session
+- Fix: Removed the wrong warning about diverging wip branch when joining a new session
 
 # 5.3.1
 - Fix: Added documentation for `mob start --discard-uncommitted-changes` in the `mob help` command
@@ -18,7 +21,7 @@ Thanks to @TimsDevCorner for your contributions!
 # 5.3.0
 - Feature: `mob start --discard-uncommitted-changes` allows to discard uncommitted changes and then starting a new mob session
 
-Thank you @stefanscheidt for this feature request
+Thank you, @stefanscheidt, for this feature request
 
 # 5.2.0
 - Feature: `mob done` now pulls when someone else already did `done`
@@ -33,7 +36,7 @@ Thank you @stefanscheidt for this feature request
 # 5.0.1
 - Fix: The configuration option `MOB_SKIP_CI_PUSH_OPTION_ENABLED` now works correctly
 
-Thank you @stefanscheidt for reporting this issue
+Thank you, @stefanscheidt, for reporting this issue
 
 # 5.0.0
 - Feature: You can now set goals
@@ -48,42 +51,42 @@ Thank you @stefanscheidt for reporting this issue
 - Windows Performance is improved due to use of `os.UserHomeDir()`
 - Upgrade to go 1.22
 
-Thank you @schmonz for fixing the build on non-Linux Unix systems
-Thank you @jmbockhorst for improving windows performance
-Thank you @michael-mader for improving our readme
+Thank you, @schmonz, for fixing the build on non-Linux Unix systems
+Thank you, @jmbockhorst for improving windows performance
+Thank you, @michael-mader for improving our readme
 
 # 4.5.0
-- Removes feature which cancels running timers as this can lead to longer rotations if the codebase is switched. The way it was implemented is also not ideal for virus detection.
+- Removes the feature which cancels running timers as this can lead to longer rotations if the codebase is switched. The way it was implemented is also not ideal for virus detection.
 - Correct typo in the hint for creating a remote branch 
 
-Thank you @clemlatz for finding and fixing the typo
-Thank you @stefanscheidt for updating the readme on the build and install from source instructions
+Thank you, @clemlatz for finding and fixing the typo
+Thank you, @stefanscheidt for updating the readme on the build and install from source instructions
 
 # 4.4.6
 
-- Fix: Able to open last modified file with space in path
+- Fix: Able to open the last modified file with space in the path
 - Fix: `start` ignores git hooks
 - Removes deprecated io/ioutil
 - Improves uninstallation instructions
 
-Thanks to @dkbnz for improving the uninstallation instructions
-Thank you @testwill for removing the deprecated ioutil
-Thank you @kriber82 for allowing filenames with spaces
+Thank you, @dkbnz for improving the uninstallation instructions
+Thank you, @testwill for removing the deprecated ioutil
+Thank you, @kriber82 for allowing filenames with spaces
 
 # 4.4.5
 - Fix: version
 
 # 4.4.4
 - Fix: missing SHA in Arch PKGBUILD
-- Fix: missing glibc on older linux version
+- Fix: missing glibc on an older linux version
 
 # 4.4.3
 - Fix: mob.sh now specifies the remote ref when pushing to allow for custom `git config push.default` settings such as `tracking`
 - Fix: Improves the suggested command when you have uncommitted changes on an attempt to open a custom wip branch using `mob start -b green`
 - mob.sh now uses the go version 1.20.x
 
-Thanks to @jstoneham for fixing the bug with using a custom `push.default` setting!
-Thank you @tobiasehlert for fixing our GitHub Action workflows post-31st May 2023!
+Thank you, @jstoneham for fixing the bug with using a custom `push.default` setting!
+Thank you, @tobiasehlert for fixing our GitHub Action workflows post-31st May 2023!
 
 # 4.4.2
 - Fix: `mob config`, `mob help`, `mob moo` and `mob version` are now working outside of git repositories again

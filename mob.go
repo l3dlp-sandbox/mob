@@ -4,11 +4,6 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-	config "github.com/remotemobprogramming/mob/v5/configuration"
-	"github.com/remotemobprogramming/mob/v5/goal"
-	"github.com/remotemobprogramming/mob/v5/help"
-	"github.com/remotemobprogramming/mob/v5/open"
-	"github.com/remotemobprogramming/mob/v5/say"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -18,10 +13,16 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	config "github.com/remotemobprogramming/mob/v5/configuration"
+	"github.com/remotemobprogramming/mob/v5/goal"
+	"github.com/remotemobprogramming/mob/v5/help"
+	"github.com/remotemobprogramming/mob/v5/open"
+	"github.com/remotemobprogramming/mob/v5/say"
 )
 
 const (
-	versionNumber     = "5.4.1"
+	versionNumber     = "5.4.2"
 	minimumGitVersion = "2.13.0"
 )
 
