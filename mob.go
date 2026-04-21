@@ -21,6 +21,7 @@ import (
 	"github.com/remotemobprogramming/mob/v5/help"
 	"github.com/remotemobprogramming/mob/v5/open"
 	"github.com/remotemobprogramming/mob/v5/say"
+	"github.com/remotemobprogramming/mob/v5/timer/localtimer"
 	"github.com/remotemobprogramming/mob/v5/workdir"
 )
 
@@ -329,7 +330,7 @@ func execute(command string, parameter []string, configuration config.Configurat
 			help.Help(configuration)
 		}
 	case "moo":
-		moo(configuration)
+		localtimer.Moo(configuration)
 	case "sw", "squash-wip":
 		if len(parameter) > 1 && parameter[0] == "--git-editor" {
 			squashWipGitEditor(parameter[1], configuration)
@@ -434,6 +435,24 @@ func determineBranches(currentBranch Branch, localBranches []string, configurati
 	return
 }
 
+func enrichConfigurationWithBranchQualifier(configuration config.Configuration) config.Configuration {
+	if !isGit() {
+		return configuration
+	}
+
+	if configuration.WipBranchQualifier == "" {
+		currentBranch := gitCurrentBranch()
+		currentBaseBranch, _ := determineBranches(currentBranch, gitBranches(), configuration)
+
+		if currentBranch.IsWipBranch(configuration) {
+			wipBranchWithoutWipPrefix := currentBranch.removeWipPrefix(configuration).Name
+			configuration.WipBranchQualifier = removePrefix(removePrefix(wipBranchWithoutWipPrefix, currentBaseBranch.Name), configuration.WipBranchQualifierSeparator)
+		}
+	}
+
+	return configuration
+}
+
 func injectCommandWithMessage(command string, message string) string {
 	placeHolders := strings.Count(command, "%s")
 	if placeHolders > 1 {
@@ -446,41 +465,10 @@ func injectCommandWithMessage(command string, message string) string {
 	return fmt.Sprintf(command, message)
 }
 
-func executeCommandsInBackgroundProcess(commands ...string) (err error) {
-	cmds := make([]string, 0)
-	for _, c := range commands {
-		if len(c) > 0 {
-			cmds = append(cmds, c)
-		}
-	}
-	say.Debug(fmt.Sprintf("Operating System %s", runtime.GOOS))
-	switch runtime.GOOS {
-	case "windows":
-		_, err = startCommand("powershell", "-command", fmt.Sprintf("start-process powershell -NoNewWindow -ArgumentList '-command \"%s\"'", strings.Join(cmds, ";")))
-	case "darwin", "linux":
-		_, err = startCommand("sh", "-c", fmt.Sprintf("(%s) &", strings.Join(cmds, ";")))
-	default:
-		say.Warning(fmt.Sprintf("Cannot execute background commands on your os: %s", runtime.GOOS))
-	}
-	return err
-}
-
 func currentTime() string {
 	return time.Now().Format("15:04")
 }
 
-func moo(configuration config.Configuration) {
-	voiceMessage := "moo"
-	err := executeCommandsInBackgroundProcess(getVoiceCommand(voiceMessage, configuration.VoiceCommand))
-
-	if err != nil {
-		say.Warning(fmt.Sprintf("can't run voice command on your system (%s)", runtime.GOOS))
-		say.Warning(err.Error())
-		return
-	}
-
-	say.Info(voiceMessage)
-}
 
 func reset(configuration config.Configuration) {
 	if configuration.ResetDeleteRemoteWipBranch {
